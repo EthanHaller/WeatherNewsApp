@@ -1,19 +1,26 @@
-import React, { useState, useEffect } from 'react';
-import Grid2 from '@mui/material/Unstable_Grid2';
 import './App.css';
+import React, { useState } from 'react';
+import Grid from '@mui/material/Grid';
 import LocationFinder from './LocationFinder';
 import Weather from './Weather'
+import News from './News';
 
 function App() {
   const [locationDetails, setLocationDetails] = useState(null);
-
-  console.log(locationDetails);
+  const [isFahrenheit, setIsFahrenheit] = useState(true);
 
   return (
-    <Grid2>
-      <LocationFinder locationInfo={(details) => setLocationDetails(details)}></LocationFinder>
-      <Weather locationInfo={locationDetails}></Weather>
-    </Grid2>
+    <Grid container spacing={3} sx={{margin: 0, padding: 0}}>
+      <Grid container>
+        <LocationFinder locationInfo={(details) => setLocationDetails(details)}></LocationFinder>
+        <Grid item>ºC</Grid>
+        <Grid item>Dark</Grid>
+      </Grid>
+      <Grid container>
+        <Weather locationInfo={locationDetails}></Weather>
+        <News></News>
+      </Grid>
+    </Grid>
   )
 }
 export default App;

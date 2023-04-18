@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import {TextField, Button} from "@mui/material";
+import Grid from '@mui/material/Grid';
 
 function LocationFinder( {locationInfo} ) {
     const [location, setLocation] = useState("");
@@ -10,6 +11,7 @@ function LocationFinder( {locationInfo} ) {
     }
 
     const sendRequest = () => {
+        if(location === "") return;
         const limit = 1;
         const apiLink = `http://api.openweathermap.org/geo/1.0/direct?q=${location}&limit=${limit}&appid=${process.env.REACT_APP_openweather_api}`
         fetch(apiLink)
@@ -26,13 +28,18 @@ function LocationFinder( {locationInfo} ) {
 
     return (
         <React.Fragment>
-            <TextField 
-                label="Location"
-                variant='filled'
-                autoFocus={true}
-                onChange={changeLocation}
-            />
-            <Button onClick={() => sendRequest()}>Search</Button>
+            <Grid item xs={8}>
+                <TextField
+                    fullWidth
+                    label="Location"
+                    variant='filled'
+                    autoFocus={true}
+                    onChange={changeLocation}
+                />
+            </Grid>
+            <Grid item>
+                <Button sx={{height: '100%'}} onClick={() => sendRequest()}>Search</Button>
+            </Grid>
         </React.Fragment>
     )
 }
