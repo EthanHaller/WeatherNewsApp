@@ -1,8 +1,11 @@
-function WeatherIcon( {weatherInfo} ) {
-    const iconId = weatherInfo.current.weather[0].icon
-
+function WeatherIcon( {iconId, scale} ) {
+    if(scale === 1) {
+        return (
+            <img src={`https://openweathermap.org/img/wn/${iconId}.png`} alt=''></img>
+        )
+    }
     return (
-        <img src={`https://openweathermap.org/img/wn/${iconId}@2x.png`} alt=''></img>
+        <img src={`https://openweathermap.org/img/wn/${iconId}@${scale}x.png`} alt=''></img>
     )
 }
 

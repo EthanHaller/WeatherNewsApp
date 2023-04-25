@@ -17,18 +17,16 @@ function Weather( {locationInfo} ) {
     }, [locationInfo])
     if(!weatherInfo) return
 
-    console.log(weatherInfo)
-
     return (
-        <React.Fragment>
-            <Grid container>
+        <Grid item container xs={9}>
+            <Grid container style={{ flexWrap: 'nowrap', overflowX: 'scroll' }} spacing={1}>
                 <CurrentWeather weatherInfo={weatherInfo}></CurrentWeather>
-                <WeeklyWeather></WeeklyWeather>
+                <DailyWeather weatherInfo={weatherInfo}></DailyWeather>
             </Grid>
-            <Grid container>
-                <DailyWeather></DailyWeather>
+            <Grid container style={{ flexWrap: 'nowrap', overflowX: 'scroll', overflowY: 'clip', height: '50%' }} spacing={1}>
+                <WeeklyWeather weatherInfo={weatherInfo}></WeeklyWeather>
             </Grid>
-        </React.Fragment>
+        </Grid>
     )
 }
 
