@@ -1,26 +1,29 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import WeatherIcon from './WeatherIcon';
 
-function WeeklyWeather( {weatherInfo} ) {
+function WeeklyWeather( {weatherInfo, units} ) {
     const daily = weatherInfo.daily;
     let items = [];
 
     for(let i=0; i < 7 && i < daily.length; i++) {
         const day = getDateFromDateTime(daily[i].dt)
-        const tempMax = daily[i].temp.max;
-        const tempMaxF = Math.round(9/5 * (tempMax - 273.15) + 32)
-        const tempMin = daily[i].temp.min;
-        const tempMinF = Math.round(9/5 * (tempMin - 273.15) + 32)
+        let tempMax = daily[i].temp.max;
+        if(units === "F") tempMax = Math.round((9/5 * (tempMax - 273.15)) + 32);
+        else tempMax = Math.round(tempMax - 273.15);
+        let tempMin = daily[i].temp.min;
+        if(units === "F") tempMin = Math.round((9/5 * (tempMin - 273.15)) + 32);
+        else tempMin = Math.round(tempMin - 273.15);
+
 
         const iconId = daily[i].weather[0].icon
 
         const item = (
             <Grid item xs={2} sx={{ height: '100%' }} key={i}>
-                <Paper style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
+                <Paper square style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
                     <p>{day}</p>
-                    <p>{tempMinF + "º | " + tempMaxF + "º"}</p>
+                    <p>{tempMax + "º | " + tempMin + "º"}</p>
                     <WeatherIcon iconId={iconId} scale={2}></WeatherIcon>
                 </Paper>
             </Grid>
@@ -29,8 +32,15 @@ function WeeklyWeather( {weatherInfo} ) {
     }
 
     return (
-        <Grid item container style={{ flexWrap: 'nowrap', overflowX: 'scroll', height: '100%' }} spacing={1} xs={12}>
-            {items}
+        <Grid item xs={12}>
+            <Paper square style={{ height: '100%'}} elevation={0}>
+                <h3 style={{margin: '0', padding: '2%'}}>Daily Weather</h3>
+                <Paper square elevation={0}>
+                <Grid container style={{ flexWrap: 'nowrap', overflowX: 'scroll', width: '95%', height: '80%', margin: '2%'}} spacing={1}>
+                    {items}
+                </Grid>
+                </Paper>
+            </Paper>
         </Grid>
     )
 }

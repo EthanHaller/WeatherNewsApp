@@ -4,7 +4,7 @@ import Grid from '@mui/material/Grid';
 import WeeklyWeather from './WeeklyWeather';
 import DailyWeather from './DailyWeather';
 
-function Weather( {locationInfo} ) {
+function Weather( {locationInfo, units} ) {
     const [weatherInfo, setWeatherInfo] = useState(null)
     useEffect(() => {
         if(!locationInfo) return;
@@ -15,16 +15,16 @@ function Weather( {locationInfo} ) {
         .catch(err => console.log(err))
         .then(obj => setWeatherInfo(obj))
     }, [locationInfo])
-    if(!weatherInfo) return
+    if(!weatherInfo) return <p>Loading...</p>
 
     return (
-        <Grid item container xs={9}>
-            <Grid container style={{ flexWrap: 'nowrap', overflowX: 'scroll' }} spacing={1}>
-                <CurrentWeather weatherInfo={weatherInfo}></CurrentWeather>
-                <DailyWeather weatherInfo={weatherInfo}></DailyWeather>
+        <Grid container spacing={0} xs={8} style={{margin: '0px', padding: '0px'}}>
+            <Grid container spacing={0} style={{margin: '0px', padding: '0px'}}>
+                <CurrentWeather weatherInfo={weatherInfo} units={units}></CurrentWeather>
+                <DailyWeather weatherInfo={weatherInfo} units={units}></DailyWeather>
             </Grid>
-            <Grid container style={{ flexWrap: 'nowrap', overflowX: 'scroll', overflowY: 'clip', height: '50%' }} spacing={1}>
-                <WeeklyWeather weatherInfo={weatherInfo}></WeeklyWeather>
+            <Grid container spacing={0} sx={{ flexWrap: 'nowrap', overflowX: 'scroll', overflowY: 'clip', height: '50%' }} style={{margin: '0px', padding: '0px'}}>
+                <WeeklyWeather weatherInfo={weatherInfo} units={units}></WeeklyWeather>
             </Grid>
         </Grid>
     )

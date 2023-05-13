@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import {TextField, Button} from "@mui/material";
-import Grid from '@mui/material/Grid';
+import { Button, InputBase, Box } from "@mui/material";
+import { Search } from '@mui/icons-material';
+import useStyles from './styles'
 
 function LocationFinder( {locationInfo} ) {
+    const classes = useStyles();
     const [location, setLocation] = useState("");
     const[locationDetails, setLocationDetails] = useState(null);
 
@@ -27,20 +29,18 @@ function LocationFinder( {locationInfo} ) {
     }, [locationDetails, locationInfo])
 
     return (
-        <React.Fragment>
-            <Grid item xs={8}>
-                <TextField
-                    fullWidth
-                    label="Location"
-                    variant='filled'
-                    autoFocus={true}
+        <Box>
+            <Box sx={{ display: 'flex', alignItems: 'center', backgroundColor: 'rgba(255,255,255,0.15)', '&:hover': {backgroundColor: 'rgba(255,255,255,0.25)'} }}>
+                <Search sx={{ color: 'white', mx: 1, my: 0.5 }} />
+                <InputBase
+                    sx={{ ml: 1, flex: 1, '& input': {color: 'white'} }}
+                    placeholder="Search Location"
+                    inputProps={{ 'aria-label': 'search location' }}
                     onChange={changeLocation}
                 />
-            </Grid>
-            <Grid item>
-                <Button sx={{height: '100%'}} onClick={() => sendRequest()}>Search</Button>
-            </Grid>
-        </React.Fragment>
+                <Button variant='outlined' sx={{ color: 'white', border: 1 }} onClick={() => sendRequest()}>Search</Button>
+            </Box>
+        </Box>
     )
 }
 
