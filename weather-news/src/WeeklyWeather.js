@@ -2,6 +2,7 @@ import React from 'react'
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import WeatherIcon from './WeatherIcon';
+import { Typography } from '@mui/material';
 
 function WeeklyWeather( {weatherInfo, units} ) {
     const daily = weatherInfo.daily;
@@ -32,16 +33,12 @@ function WeeklyWeather( {weatherInfo, units} ) {
     }
 
     return (
-        <Grid item xs={12}>
-            <Paper square style={{ height: '100%'}} elevation={0}>
-                <h3 style={{margin: '0', padding: '2%'}}>Daily Weather</h3>
-                <Paper square elevation={0}>
-                <Grid container style={{ flexWrap: 'nowrap', overflowX: 'scroll', width: '95%', height: '80%', margin: '2%'}} spacing={1}>
-                    {items}
-                </Grid>
-                </Paper>
-            </Paper>
-        </Grid>
+        <Paper elevation={3} sx={{ maxWidth: '100%', p: '20px', m: '15px' }}>
+            <Typography variant='h6'>Daily Weather</Typography>
+            <Grid container style={{ flexWrap: 'nowrap', overflowX: 'scroll', width: '95%', height: '80%', margin: '2%'}} spacing={1}>
+                {items}
+            </Grid>
+        </Paper>
     )
 }
 

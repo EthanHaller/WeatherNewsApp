@@ -7,6 +7,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import { Box } from '@mui/material';
 
 function News() {
     const[newsInfo, setNewsInfo] = useState(null);
@@ -17,7 +18,7 @@ function News() {
         .catch(err => console.log(err))
         .then(obj => setNewsInfo(obj))
     }, [])
-    if(!newsInfo) return;
+    if(!newsInfo) return <p></p>;
     console.log(newsInfo);
 
     const stories = newsInfo.results;
@@ -80,16 +81,14 @@ function News() {
     }
 
     return (
-        <Grid item xs={3} sx={{height: '100%'}}>
-            <Paper square elevation={0}>
-                <h3 style={{margin: '0', padding: '5%'}}>News</h3>
-                <Paper square elevation={0} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', padding: '2%' }}>
-                    <Paper square sx={{height: '600px', width: '90%', overflowY: 'scroll'}}>
-                        {items}
-                    </Paper>
+        <Paper elevation={3} id='news' sx={{ height: '100%', p: '20px', m: '15px' }}>
+            <Typography variant='h6'> News</Typography>
+            <Paper square elevation={0} style={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'center', padding: '15px', paddingTop: '4%', height: '95%' }}>
+                <Paper square sx={{ height: '90%', overflowY: 'scroll'}}>
+                    {items}
                 </Paper>
             </Paper>
-        </Grid>
+        </Paper>
     )
 }
 

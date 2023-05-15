@@ -29,18 +29,19 @@ function LocationFinder( {locationInfo} ) {
     }, [locationDetails, locationInfo])
 
     return (
-        <Box>
+        <>
             <Box sx={{ display: 'flex', alignItems: 'center', backgroundColor: 'rgba(255,255,255,0.15)', '&:hover': {backgroundColor: 'rgba(255,255,255,0.25)'} }}>
-                <Search sx={{ color: 'white', mx: 1, my: 0.5 }} />
+                <Search sx={{ mx: 1, my: 0.5 }} />
                 <InputBase
-                    sx={{ ml: 1, flex: 1, '& input': {color: 'white'} }}
+                    sx={{ ml: 1, flex: 1, color: 'white', width: '30vw'}}
                     placeholder="Search Location"
                     inputProps={{ 'aria-label': 'search location' }}
                     onChange={changeLocation}
                 />
-                <Button variant='outlined' sx={{ color: 'white', border: 1 }} onClick={() => sendRequest()}>Search</Button>
+                <Button variant='outlined' sx={{ border: 0, color: 'white', '&:hover': {border: 0} }} onClick={() => sendRequest()}>Search</Button>
             </Box>
-        </Box>
+            <Box sx={{ flexGrow: 1 }}></Box>
+        </>
     )
 }
 

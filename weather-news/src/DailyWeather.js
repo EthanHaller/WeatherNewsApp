@@ -2,6 +2,7 @@ import React from 'react'
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import WeatherIcon from './WeatherIcon';
+import { Typography, Box } from '@mui/material';
 
 function DailyWeather( {weatherInfo, units} ) {
     const hourly = weatherInfo.hourly;
@@ -27,17 +28,26 @@ function DailyWeather( {weatherInfo, units} ) {
         items.push(item)
     }
 
+    // return (
+    //     <Grid item xs={9}>
+    //         <Paper square style={{ height: '100%'}} elevation={0}>
+    //             <h3 style={{margin: '0', padding: '2%'}}>Hourly Weather</h3>
+    //             <Paper square elevation={0}>
+    //             <Grid container style={{ flexWrap: 'nowrap', overflowX: 'scroll', width: '95%', height: '80%', margin: '2%'}} spacing={1}>
+    //                 {items}
+    //             </Grid>
+    //             </Paper>
+    //         </Paper>
+    //     </Grid>
+    // )
+
     return (
-        <Grid item xs={9}>
-            <Paper square style={{ height: '100%'}} elevation={0}>
-                <h3 style={{margin: '0', padding: '2%'}}>Hourly Weather</h3>
-                <Paper square elevation={0}>
-                <Grid container style={{ flexWrap: 'nowrap', overflowX: 'scroll', width: '95%', height: '80%', margin: '2%'}} spacing={1}>
-                    {items}
-                </Grid>
-                </Paper>
-            </Paper>
-        </Grid>
+        <Paper elevation={3} sx={{ width: '69%', p: '20px', m: '15px' }}>
+            <Typography variant='h6'>Hourly Weather</Typography>
+            <Grid container style={{ flexWrap: 'nowrap', overflowX: 'scroll', width: '95%', height: '80%', margin: '2%'}} spacing={1}>
+                {items}
+            </Grid>
+        </Paper>
     )
 }
 

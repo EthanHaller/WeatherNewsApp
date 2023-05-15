@@ -3,6 +3,7 @@ import CurrentWeather from './CurrentWeather';
 import Grid from '@mui/material/Grid';
 import WeeklyWeather from './WeeklyWeather';
 import DailyWeather from './DailyWeather';
+import { Box } from '@mui/material';
 
 function Weather( {locationInfo, units} ) {
     const [weatherInfo, setWeatherInfo] = useState(null)
@@ -15,18 +16,16 @@ function Weather( {locationInfo, units} ) {
         .catch(err => console.log(err))
         .then(obj => setWeatherInfo(obj))
     }, [locationInfo])
-    if(!weatherInfo) return <p>Loading...</p>
+    if(!weatherInfo) return <p></p>
 
     return (
-        <Grid container spacing={0} xs={8} style={{margin: '0px', padding: '0px'}}>
-            <Grid container spacing={0} style={{margin: '0px', padding: '0px'}}>
+        <Box id='weather' sx={{ display: 'flex', flexDirection: 'column', maxWidth: '70vw' }}>
+            <Box sx={{ display: 'flex', flexDirection: 'row', maxWidth: '100%' }}>
                 <CurrentWeather weatherInfo={weatherInfo} units={units}></CurrentWeather>
                 <DailyWeather weatherInfo={weatherInfo} units={units}></DailyWeather>
-            </Grid>
-            <Grid container spacing={0} sx={{ flexWrap: 'nowrap', overflowX: 'scroll', overflowY: 'clip', height: '50%' }} style={{margin: '0px', padding: '0px'}}>
-                <WeeklyWeather weatherInfo={weatherInfo} units={units}></WeeklyWeather>
-            </Grid>
-        </Grid>
+            </Box>
+            <WeeklyWeather weatherInfo={weatherInfo} units={units}></WeeklyWeather>
+        </Box>
     )
 }
 
